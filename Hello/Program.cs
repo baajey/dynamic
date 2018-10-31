@@ -47,7 +47,7 @@ namespace Hello
                 }
             }
 
-
+            string json = JsonConvert.SerializeObject(lstDictionary);
 
             Console.Read();
         }
