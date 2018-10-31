@@ -16,16 +16,38 @@ namespace Hello
             string jsonKeyVal = System.IO.File.ReadAllText(@"C:\Users\manis\source\repos\Hello\JsonData.KeyVal.json");
             string jsonWideCol = System.IO.File.ReadAllText(@"C:\Users\manis\source\repos\Hello\JsonData.Wide.json");
             bool isWideColumn = false;
+            List<Dictionary<string, string>> lstDictionary = new List<Dictionary<string, string>>();
 
             dynamic dynData = JsonConvert.DeserializeObject<ExpandoObject>(jsonWideCol, new ExpandoObjectConverter());
+
+
             var dicObj = (IDictionary<string, object>)dynData;
-            if(dicObj.ContainsKey("rows") && dicObj.ContainsKey("columns")) //&& dicObj["rows"].Count == dicObj["columns"].Count
+            List<string> columnNames = new List<string>();
+            if (dicObj.ContainsKey("rows") && dicObj.ContainsKey("columns"))
             {
                 List<object> lstRows = dynData.rows;
                 List<object> lstColumns = dynData.columns;
+                Dictionary<string, string> eachVal = new Dictionary<string, string>();
+                foreach (dynamic e in lstColumns)
+                {
+                    columnNames.Add((string)e.name);
+                }
+                foreach (dynamic e in lstRows)
+                {
+                    int i = 0;
+                    foreach (dynamic f in e)
+                    {
+
+                        eachVal[columnNames[i]] = Convert.ToString(f);
+                        i++;
+                    }
+
+                    lstDictionary.Add(eachVal);
+                    eachVal = new Dictionary<string, string>();
+                }
             }
-            List<Dictionary<string, string>> lstDictionary = new List<Dictionary<string, string>>();
-            // foreach(var item in dicObj["columns"])
+
+
 
             Console.Read();
         }
