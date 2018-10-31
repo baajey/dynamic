@@ -1,0 +1,14 @@
+{
+    "_id": "123",
+    "date": "10/10/2017",
+    "ship_status":"backordered",
+    "orderitems": [
+        {
+            "itemid": "4348",
+            "price": 10.00
+        },
+        {
+            "itemid": "5648",
+            "price": 15.00
+        }]
+}
